@@ -1,4 +1,4 @@
-// la ricerca deve essere live, a ogni lettera premuta si aggiornano i risultati
+// Chiave: 7a282772
 
 class Biblioteca {
   constructor() {
