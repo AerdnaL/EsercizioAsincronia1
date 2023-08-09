@@ -61,8 +61,8 @@ class Biblioteca {
   }
 }
 
-const Biblioteca1 = new Biblioteca();
-/*Biblioteca1.elencoLibri = [
+/*const Biblioteca1 = new Biblioteca();
+Biblioteca1.elencoLibri = [
   { autore: 'Dante Alighieri', titolo: 'La Divina Commedia' },
   { autore: 'Dante Alighieri', titolo: 'De Vulgari Eloquentia' },
   { autore: 'Alessandro Manzoni', titolo: 'I Promessi Sposi' },
@@ -71,10 +71,37 @@ const Biblioteca1 = new Biblioteca();
   { autore: 'Luigi Pirandello', titolo: 'Mal Giocondo' },
 ];*/
 
-Biblioteca1.elencoLibri;
+/*async function ottieniDatiEpopolaBiblioteca(url, biblioteca) {
+  try {
+    const response = await fetch(url);
+    const data = await response.json();
+    biblioteca.elencoLibri = data; // Assegna i dati ottenuti all'array nella classe
+    biblioteca.ricercaLibri('tuo_stringa_di_ricerca'); // Esegui la ricerca
+  } catch (error) {
+    console.error('Si è verificato un errore:', error);
+  }
+}
+
+const url = 'URL_dell_API'; // URL da cui ottenere i dati
+
+const Biblioteca1 = new Biblioteca();
+ottieniDatiEpopolaBiblioteca(url, Biblioteca1);
+*/
+
+async function provaFetch (url, biblioteca) {
+  const risposta = await fetch(URL)
+  .then(
+    (response) => response.json(),
+    (error) => alert(error)
+  )
+  .then((data) => {
+    const db = JSON.parse(data);
+    console.log(db);
+  });
+}
 
 const inputTesto = document.getElementById('inputTesto');
-const spazioRisultati = document.getElementById('spazioRisultati');
+Risultati = document.getElementById('spazioRisultati');
 
 inputTesto.addEventListener('input', () => {
   spazioRisultati.replaceChildren();
