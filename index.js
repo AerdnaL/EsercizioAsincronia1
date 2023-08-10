@@ -6,8 +6,6 @@ const op = 'get';
 const key = '7a282772';
 const URL = base + '/' + op + '?key=' + key;
 
-
-
 /*const db = (URL) => { non funge
   fetch(URL)
     .then(
@@ -71,37 +69,42 @@ Biblioteca1.elencoLibri = [
   { autore: 'Luigi Pirandello', titolo: 'Mal Giocondo' },
 ];*/
 
-/*async function ottieniDatiEpopolaBiblioteca(url, biblioteca) {
-  try {
-    const response = await fetch(url);
-    const data = await response.json();
-    biblioteca.elencoLibri = data; // Assegna i dati ottenuti all'array nella classe
-    biblioteca.ricercaLibri('tuo_stringa_di_ricerca'); // Esegui la ricerca
-  } catch (error) {
-    console.error('Si è verificato un errore:', error);
-  }
-}
-
-const url = 'URL_dell_API'; // URL da cui ottenere i dati
+/*function ottieniDati (Biblioteca, URL) {
+  const promessa = fetch(URL)
+    .then(
+      (response) => response.json(),
+      (error) => alert(error)
+    )
+    .then((data) => {
+      const db = JSON.parse(data);
+      console.log(db);
+    });
+}*/
 
 const Biblioteca1 = new Biblioteca();
-ottieniDatiEpopolaBiblioteca(url, Biblioteca1);
-*/
 
-async function provaFetch (url, biblioteca) {
-  const risposta = await fetch(URL)
-  .then(
-    (response) => response.json(),
-    (error) => alert(error)
-  )
-  .then((data) => {
-    const db = JSON.parse(data);
-    console.log(db);
-  });
+function fetchDati(url, callback) {
+  fetch(URL)
+    .then(
+      (response) => response.json(),
+      (error) => alert(error)
+    )
+    .then((data) => callback(data));
 }
 
+function creaOggetto(dati) {
+  // creo la biblioteca ma devo già avere i dati
+  const Biblioteca1 = new Biblioteca();
+  Biblioteca1.elencoLibri = dati;
+}
+
+fetchDati(URL, (dati) => {
+  const db = JSON.parse(dati);
+  Biblioteca1.elencoLibri = db;
+});
+
 const inputTesto = document.getElementById('inputTesto');
-Risultati = document.getElementById('spazioRisultati');
+const spazioRisultati = document.getElementById('spazioRisultati');
 
 inputTesto.addEventListener('input', () => {
   spazioRisultati.replaceChildren();
